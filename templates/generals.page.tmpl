@@ -1,0 +1,114 @@
+{{template "base" .}}
+
+{{define "content"}}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img
+        src="/static/images/generals-quarters.png"
+        alt="generals quarter"
+        class="img-fluid img-thumbnail mx-auto d-block room-image"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center mt-4">General's Quarters</h1>
+      <p>
+        Your home away from home, set on the majestic waters of the Atlantic
+        Ocean, this will be a vacation to remember. Lorem ipsum dolor, sit amet
+        consectetur adipisicing elit. Architecto, animi. Enim, perferendis quo
+        aliquid ut voluptatibus omnis nihil, eius dolores molestiae quaerat
+        corrupti mollitia earum illum repellat incidunt, quod ipsa. Velit eos
+        est ullam sit iusto error sapiente non ducimus, nemo ratione, neque et
+        ipsam iure facere dolores, autem aliquam aliquid atque modi! Deserunt
+        asperiores dignissimos accusamus eos porro? Molestiae assumenda
+        asperiores possimus dolore voluptas. Sapiente culpa mollitia nesciunt
+        sit voluptatum. At minus laboriosam veritatis amet voluptas, rerum ab.
+        Voluptate!
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <a id="check-availability-btn" href="#!" class="btn btn-success"
+        >Check Availability</a
+      >
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{define "js"}}
+<script>
+  document
+    .getElementById('check-availability-btn')
+    .addEventListener('click', () => {
+      const html = `
+      <form
+          action="/search-availability"
+          method="POST"
+          class="needs-validation"
+          id="check-availability-form"
+          novalidate
+        >
+          <div id="reservation-dates-modal" class="row">
+            <div class="mb-3 col-auto">
+              <input
+                required
+                type="text"
+                class="form-control"
+                id="start-modal"
+                name="start"
+                aria-describedby="startDateHelp"
+                placeholder="Arrival Date"
+              />
+              <div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">
+                Please choose a starting date.
+              </div>
+            </div>
+
+            <div class="mb-3 col-auto">
+              <input
+                required
+                type="text"
+                class="form-control"
+                id="end-modal"
+                name="end"
+                aria-describedby="endDateHelp"
+                placeholder="Departure"
+              />
+              <div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">Please choose a ending date.</div>
+            </div>
+          </div>
+        </form>
+      `;
+
+      attention.custom({
+        msg: html,
+        title: 'Choose your dates',
+        didOpen: () => {
+              const elememt = document.getElementById(
+                'reservation-dates-modal'
+              );
+              const rangepicker = new DateRangePicker(elememt, {
+                format: 'yyyy-mm-dd',
+              });
+            },
+        callback: (result) => {
+          const form = document.getElementById('check-availability-form');
+          const formData = new FormData(form);
+          formData.append('csrf_token', '{{.CSRFToken}}');
+          fetch('/search-availability-json', {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => res.json())
+            .then((data) => console.log(data));
+        },
+      });
+    });
+</script>
+{{ end }}
