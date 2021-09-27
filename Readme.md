@@ -8,3 +8,6 @@ This is the repository for my bookings and reservations project demo.
 - Uses [nosurf](github.com/justinas/nosurf)
 
 This project has only purpose to learn Web application with Golang language
+
+Some commands:
+go test -coverprofile=coverage.out && go tool cover -html=coverage.out (this command use to show test coverage)

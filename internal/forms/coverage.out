@@ -1,0 +1,16 @@
+mode: set
+github.com/DungBuiTien1999/bookings/internal/forms/errors.go:6.44,8.2 1 1
+github.com/DungBuiTien1999/bookings/internal/forms/errors.go:11.42,14.18 2 0
+github.com/DungBuiTien1999/bookings/internal/forms/errors.go:17.2,17.14 1 0
+github.com/DungBuiTien1999/bookings/internal/forms/errors.go:14.18,16.3 1 0
+github.com/DungBuiTien1999/bookings/internal/forms/forms.go:18.33,23.2 1 1
+github.com/DungBuiTien1999/bookings/internal/forms/forms.go:26.43,27.31 1 1
+github.com/DungBuiTien1999/bookings/internal/forms/forms.go:27.31,29.37 2 1
+github.com/DungBuiTien1999/bookings/internal/forms/forms.go:29.37,31.4 1 1
+github.com/DungBuiTien1999/bookings/internal/forms/forms.go:36.39,39.2 2 1
+github.com/DungBuiTien1999/bookings/internal/forms/forms.go:42.29,44.2 1 1
+github.com/DungBuiTien1999/bookings/internal/forms/forms.go:47.57,49.21 2 1
+github.com/DungBuiTien1999/bookings/internal/forms/forms.go:53.2,53.13 1 1
+github.com/DungBuiTien1999/bookings/internal/forms/forms.go:49.21,52.3 2 1
+github.com/DungBuiTien1999/bookings/internal/forms/forms.go:57.38,58.40 1 1
+github.com/DungBuiTien1999/bookings/internal/forms/forms.go:58.40,60.3 1 1

@@ -1,0 +1,22 @@
+mode: set
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:24.47,28.2 1 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:31.33,33.2 1 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:36.67,41.2 3 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:44.68,56.2 5 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:59.71,62.2 1 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:65.69,68.2 1 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:71.74,79.2 4 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:82.78,84.16 2 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:89.2,102.19 6 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:113.2,115.66 2 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:84.16,87.3 2 0
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:102.19,111.3 4 0
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:119.70,122.2 1 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:125.75,128.2 1 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:131.79,135.2 3 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:143.83,150.16 3 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:154.2,155.14 2 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:150.16,152.3 1 0
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:159.82,161.9 2 1
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:168.2,174.4 4 0
+github.com/DungBuiTien1999/bookings/internal/handlers/handlers.go:161.9,166.3 4 1

@@ -137,6 +137,17 @@
           text: msg,
         });
       }
+
+      {{with .Error}}
+      notify("{{.}}", "error")
+      {{end}}
+      {{with .Flash}}
+      notify("{{.}}", "success")
+      {{end}}
+      {{with .Warning}}
+      notify("{{.}}", "warning")
+      {{end}}
+
       function notifyModal(icon, title, text, confirmBtnText) {
         Swal.fire({
           icon: icon,
