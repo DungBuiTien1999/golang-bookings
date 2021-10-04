@@ -1,0 +1,2 @@
+INSERT INTO `rooms` (`room_name`,`created_at`,`updated_at`) VALUES ('General\'s Quarters','2021-02-10 00:00:00','2021-02-10 00:00:00');
+INSERT INTO `rooms` (`room_name`,`created_at`,`updated_at`) VALUES ('Major\'s Suite','2021-10-02 00:00:00','2021-10-02 00:00:00');

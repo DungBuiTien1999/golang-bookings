@@ -59,7 +59,7 @@
                 type="text"
                 class="form-control"
                 id="start-modal"
-                name="start"
+                name="start_date"
                 aria-describedby="startDateHelp"
                 placeholder="Arrival Date"
               />
@@ -75,7 +75,7 @@
                 type="text"
                 class="form-control"
                 id="end-modal"
-                name="end"
+                name="end_date"
                 aria-describedby="endDateHelp"
                 placeholder="Departure"
               />
@@ -90,23 +90,36 @@
         msg: html,
         title: 'Choose your dates',
         didOpen: () => {
-              const elememt = document.getElementById(
-                'reservation-dates-modal'
-              );
-              const rangepicker = new DateRangePicker(elememt, {
-                format: 'yyyy-mm-dd',
-              });
-            },
+          const elememt = document.getElementById('reservation-dates-modal');
+          const rangepicker = new DateRangePicker(elememt, {
+            format: 'yyyy-mm-dd',
+            minDate: new Date(),
+          });
+        },
         callback: (result) => {
           const form = document.getElementById('check-availability-form');
           const formData = new FormData(form);
           formData.append('csrf_token', '{{.CSRFToken}}');
+          formData.append('room_id', '1');
           fetch('/search-availability-json', {
-            method: "POST",
+            method: 'POST',
             body: formData,
           })
             .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+              if (data.ok) {
+                attention.custom({
+                  icon: 'success',
+                  msg: `<p>Room is availability</p>
+                       <p><a href="/book-room?id=${data.room_id}&sd=${data.start_date}&ed=${data.end_date}" class="btn btn-primary">Book now!</a></p>`,
+                  showConfirmButton: false,
+                });
+              } else {
+                attention.error({
+                  msg: 'No Availability',
+                });
+              }
+            });
         },
       });
     });
