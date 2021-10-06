@@ -70,6 +70,7 @@ func run() (*driver.DB, error) {
 
 	// connect to database
 	log.Println("Connecting to database...")
+	// modify user:password of database yourself (here is root:root)
 	db, err := driver.ConnectSQL("root:root@/golangbookings?parseTime=true")
 	if err != nil {
 		log.Fatal("Cannot connect to database! Dying...")

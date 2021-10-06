@@ -14,3 +14,7 @@ go test -coverprofile=coverage.out && go tool cover -html=coverage.out (this com
 chmod +x run.sh
 ./run.sh
 go test -v ./... (root directory)
+
+migrate database before run
+create a new schema with name is golangbookings (whatever is up for you but remember edit code connect database)
+`soda migrate` (notice: installs buffalo, link: https://gobuffalo.io/en/docs/getting-started/installation/)
