@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 
 	"github.com/DungBuiTien1999/bookings/internal/config"
+	"github.com/DungBuiTien1999/bookings/internal/helpers"
 	"github.com/DungBuiTien1999/bookings/internal/models"
 	"github.com/justinas/nosurf"
 )
@@ -28,6 +29,9 @@ func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateDa
 	td.Warning = app.Session.PopString(r.Context(), "warning")
 	td.Error = app.Session.PopString(r.Context(), "error")
 	td.CSRFToken = nosurf.Token(r)
+	if helpers.IsAuthenticated(r) {
+		td.IsAuthenticated = 1
+	}
 	return td
 }
 

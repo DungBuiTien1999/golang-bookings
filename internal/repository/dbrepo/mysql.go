@@ -2,9 +2,11 @@ package dbrepo
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	"github.com/DungBuiTien1999/bookings/internal/models"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func (m *mysqlDBRepo) AllUsers() bool {
@@ -153,4 +155,80 @@ func (m *mysqlDBRepo) GetRoomByID(id int) (models.Room, error) {
 		return room, err
 	}
 	return room, nil
+}
+
+// GetUserByID returns a user by id
+func (m *mysqlDBRepo) GetUserByID(id int) (models.User, error) {
+	// request last longer 3 second so discard write record into db
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `
+		select id, first_name, last_name, email, password, access_level, created_at, updated_at from users where id = ?
+	`
+	var user models.User
+	err := m.DB.QueryRowContext(ctx, query, id).Scan(
+		&user.ID,
+		&user.FirstName,
+		&user.LastName,
+		&user.Email,
+		&user.Password,
+		&user.AccessLevel,
+		&user.CreatedAt,
+		&user.UpdatedAt,
+	)
+	if err != nil {
+		return user, err
+	}
+	return user, nil
+}
+
+// UpdateUser updates a user in database
+func (m *mysqlDBRepo) UpdateUser(u models.User) error {
+	// request last longer 3 second so discard write record into db
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `
+		update users set first_name = ?, last_name = ?, email = ?, access_level = ?, updated_at = ?
+	`
+
+	_, err := m.DB.ExecContext(ctx, query,
+		u.FirstName,
+		u.LastName,
+		u.Email,
+		u.AccessLevel,
+		time.Now(),
+	)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// Authenticate authenticates a user
+func (m *mysqlDBRepo) Authenticate(email, testPassword string) (int, string, error) {
+	// request last longer 3 second so discard write record into db
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	var id int
+	var hashedPassword string
+
+	err := m.DB.QueryRowContext(ctx, `select id, password from users where email = ?`, email).Scan(
+		&id,
+		&hashedPassword,
+	)
+	if err != nil {
+		return id, "", err
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(testPassword))
+	if err == bcrypt.ErrMismatchedHashAndPassword {
+		return 0, "", errors.New("incorrect password")
+	} else if err != nil {
+		return 0, "", err
+	}
+
+	return id, hashedPassword, nil
 }
